@@ -27,7 +27,7 @@ function App() {
 
 const onInsert = (text) =>{
     setTodos(
-      ...todos([{
+      todos.concat([{
         id: nextId.current++,
         text: text,
         checked: false
@@ -40,7 +40,7 @@ const onDelete =(id)=>{
 };
 const onToggle=(id)=>{
   setTodos(todos.map(todo =>
-    todo.id === id ?  {...todo, checked: !todo.checked}:todo
+    todo.id === id ?  {...todo, checked: !todo.checked}:todo //
   ));
 };
 

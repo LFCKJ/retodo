@@ -1,6 +1,6 @@
 function TodoListItem({ todo,onDelete,onToggle }) {
     return ( 
-    <div>
+    <div style={{textDecoration: todo.checked ? "line-through":"none"}}>
         <input type="checkbox" 
         checked={todo.checked} 
         onChange={()=>onToggle(todo.id)}/>
