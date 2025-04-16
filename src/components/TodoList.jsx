@@ -1,35 +1,22 @@
-import { useState } from "react";
 
-function TodoList() {
+import TodoListItem from './TodoListItem'; // 경로는 실제 위치에 맞게 조정
+
+
+function TodoList(todos) {
 //Logic area
-    const [todos, _setTodos] = useState([
-        {
-            id: 1,
-            text: '할 일 1',
-            done: false
-        },
-        {
-            id: 2,
-            text: '할 일 2',
-            done: true
-        },
-        {
-            id: 3,
-            text: '할 일 3',
-            done: false
-        }
-    ]); 
+    
       
 
-
-
-    return ( 
-    <ul>
-          {todos.map((item)=>(
-            <li>{item.text}</li>
+  return ( 
+        <>
+           <ul>
+          {todos.map((todo)=>(
+           < TodoListItem ket={todo.id} todo={todo} />
           ))}
     
-    </ul> );
+           </ul>
+    </>
+  );
 }
 
 export default TodoList;  
