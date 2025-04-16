@@ -1,36 +1,54 @@
 
 import './App.css'
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Todoinsert from './components/Todoinsert';
 import TodoList from './components/TodoList';
 
 function App() {
   //Logic area
-  const [todos, _setTodos] = useState([
+  const [todos, setTodos] = useState([
     {
         id: 1,
         text: '할 일 1',
-        done: false
+        checked: false
     },
     {
         id: 2,
         text: '할 일 2',
-        done: true
+        checked: true
     },
     {
         id: 3,
         text: '할 일 3',
-        done: false
+        checked: false
     }
 ]); 
-  
+ const nextId = useRef(4);
 
+const onInsert = (text) =>{
+    setTodos(
+      ...todos([{
+        id: nextId.current++,
+        text: text,
+        checked: false
+      }])
+    )
+}
+
+const onDelete =(id)=>{
+  setTodos(todos.filter(todo => todo.id !==id)); //삭제하는 값만 제외하고 나머지 값들만 남김
+};
+const onToggle=(id)=>{
+  setTodos(todos.map(todo =>
+    todo.id === id ?  {...todo, checked: !todo.checked}:todo
+  ));
+};
 
 //view area
   return (
     <div>
-      <Todoinsert/>
-      <TodoList todos={todos}/>    
+      <Todoinsert onInsert={onInsert}/>
+      <TodoList todos={todos} onDelete={onDelete} onToggle={onToggle}/>    
     </div>
   );
 }
